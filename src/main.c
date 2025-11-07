@@ -19,6 +19,8 @@ void print_info()
 int main(int argc, char **argv)
 {
     unsigned int pg_s, mem_sz;
+    char *sub_a;
+
     unsigned int addr;
     char rw;
 
@@ -27,20 +29,21 @@ int main(int argc, char **argv)
         perror("Argumentos faltando: ");
     }
 
-    pg_s = atoi(argv[2]);
-    mem_sz = atoi(argv[3]);
+    sub_a = argv[1];
+    pg_s = atoi(argv[3]);
+    mem_sz = atoi(argv[4]);
 
     FILE *fp;
-    fp = fopen(argv[1], "r");
+    fp = fopen(argv[2], "r");
 
     if (fp == 0)
     {
         perror("erro ao abrir o aquivo");
     }
 
-    while (fscanf(fp, "%x %c",addr, rw)==2){
-
+    while (fscanf(fp, "%x %c", addr, rw) == 2)
+    {
     }
 
-        return 0;
+    return 0;
 }
