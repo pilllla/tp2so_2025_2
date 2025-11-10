@@ -24,27 +24,27 @@ $(TARGET): $(SRCS)
 .PHONY: run_test1
 run_test1: all
 #	@echo "--- Executando teste_preenchimento (LRU, 4KB pag, 16KB mem, debug=1) ---"
-	@./$(TARGET) lru testes/todos_4_16_1_preenchimento.log 4 16 1
+	@./$(TARGET) lru our_tests/todos_4_16_1_preenchimento.log 4 16 1
 
 .PHONY: run_test2
 run_test2: all
-	@./$(TARGET) lfu testes/todos_4_16_1_suja.log 4 16 1
+	@./$(TARGET) lfu our_tests/todos_4_16_1_suja.log 4 16 1
 
 .PHONY: run_test3_1
 run_test3_1: all
-	@./$(TARGET) random testes/todos_4_16_1_subs.log 4 16 1
+	@./$(TARGET) random our_tests/todos_4_16_1_subs.log 4 16 1
 
 .PHONY: run_test3_2
 run_test3_2: all
-	@./$(TARGET) lfu testes/todos_4_16_1_subs.log 4 16 1
+	@./$(TARGET) lfu our_tests/todos_4_16_1_subs.log 4 16 1
 
 .PHONY: run_test4_1
 run_test4_1: all
-	@./$(TARGET) lru testes/lru_lfu.log 4 16 1
+	@./$(TARGET) lru our_tests/lru_lfu.log 4 16 1
  
 .PHONY: run_test4_2
 run_test4_2: all
-	@./$(TARGET) lfu testes/lru_lfu.log 4 16 1
+	@./$(TARGET) lfu our_tests/lru_lfu.log 4 16 1
 
 .PHONY: clean
 clean:
