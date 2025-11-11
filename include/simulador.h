@@ -36,6 +36,8 @@ int substitui_lru(void);
 
 int substitui_lfu(void);
 
+int substitui_mru(void);
+
 void* alocar_tabela_densa(unsigned long num_paginas, unsigned long* custo_memoria);
 int lookup_tabela_densa(void* tabela, unsigned int num_pagina);
 void atualizar_tabela_densa(void* tabela, unsigned int num_pagina, int quadro);

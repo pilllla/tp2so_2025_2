@@ -143,6 +143,20 @@ int substitui_lfu(void)
     return quadro_substituido;
 }
 
+int substitui_mru(void)
+{
+    unsigned long long maior_tempo = 0; // Começa com 0 (ou ULLONG_MIN)
+    int quadro_substituido = 0;
+    for (unsigned int i = 0; i < num_quadros; i++) {
+        // Encontra o quadro com o MAIOR tempo de acesso (o mais recente)
+        if (memoria_fisica[i].ultimo_acesso > maior_tempo) {
+            maior_tempo = memoria_fisica[i].ultimo_acesso;
+            quadro_substituido = i;
+        }
+    }
+    return quadro_substituido;
+}
+
 void* alocar_tabela_densa(unsigned long num_paginas, unsigned long* custo_memoria)
 {
     *custo_memoria = num_paginas * sizeof(int);
@@ -359,7 +373,7 @@ void processar_acesso(
 )
 /*
 Seleção entre todos os tipos de algoritmos e tabelas
-Opções de algoritmos: lru, lfu, random (default) e mine
+Opções de algoritmos: lru, lfu, random (default) e mru
 */
 {
     contador_tempo++;
@@ -391,6 +405,7 @@ Opções de algoritmos: lru, lfu, random (default) e mine
             if (strcmp(algoritmo_usado, "random") == 0) quadro_alvo = substitui_random();
             else if (strcmp(algoritmo_usado, "lru") == 0) quadro_alvo = substitui_lru();
             else if (strcmp(algoritmo_usado, "lfu") == 0) quadro_alvo = substitui_lfu();
+            else if(strcmp(algoritmo_usado, "mru")==0) quadro_alvo = substitui_mru();
             else 
             {
                 printf("Nenhum algotimo válido selecionado; algoritmo randômico usado como default");
@@ -455,7 +470,7 @@ int main(int argc, char **argv)
 
     char *algoritmo_usado = argv[1];
     /*TODO: verificação de algoritmo usado
-    Opções: random, lru, lfu, mine (a fazer)
+    Opções: random, lru, lfu, mru
     */ 
     char *arquivo_entrada = argv[2];
     unsigned int tam_pags = atoi(argv[3]);
